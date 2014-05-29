@@ -13,7 +13,7 @@ DATABASES = {
         'NAME': 'radio',                                    # Or path to database file if using sqlite3.
         'USER': 'radio',
         'PASSWORD': '',
-        'HOST': '141.209.28.45',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
 }

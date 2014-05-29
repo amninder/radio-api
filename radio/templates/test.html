@@ -1,0 +1,44 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+<title>the title</title>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}/jplayer/jquery.jplayer.min.js"></script>
+    <link type="text/css" href="{{STATIC_URL}}/skin/skin-dark/jplayer.dark.css" rel="stylesheet" />
+    <script type="text/javascript" language="javascript">
+    $(document).ready(function() {
+      var thisData;
+        $.getJSON("http://0.0.0.0:5000/stations/?format=json", function(data){
+          thisData = data;
+          var key = 0;
+          for(key in data){
+            //document.write("<a href='"+data[key].url+"'>"+data[key].name+"</a></br>");
+            // document.write("<h2>"+data[key].school+"</h2>");
+            // document.write("<b>Station: </b> "+data[key].name+"<br/>");
+            // document.write("<b>Located at</b><br/>");
+            // document.write("Lat: "+data[key].lat+"<br/>");
+            // document.write("Lng: "+data[key].lng+"<br/>");
+            // document.write("<audio controls><source src='"+data[key].url+"'></audio></br>");
+            //document.write("<a href='"+data[key].url+"'>"+data[key].name+"</a><br/>");
+            $(".list").append("<a href='"+data[key].url+"' onclick='playsong("+data[key].url+")'>"+data[key].name+"</a><br/>");
+          }
+        });
+    });
+    function playsong(song){
+          $('#player').attr("src", song);
+          document.getElementById('player').play();
+        }
+    </script>
+</head>
+<body>
+   <audio id="player" src="http://35.8.90.120:9000/listen.m3u"></audio>
+   <button id="play" onclick="document.getElementById('player').play()">Play</button>
+   <button id="pause" onclick="document.getElementById('player').pause()">Stop</button>
+   <div class="list">
+     
+   </div>
+
+</body>
+</html>

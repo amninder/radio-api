@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>the title</title>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" language="javascript">
+    $(document).ready(function() {
+        $("#driver").click(function(event){
+          var geocodingAPI = "http://maps.googleapis.com/maps/api/geocode/json?address=1206+Eastwood+Dr,+Mount+Pleasant,+MI&sensor=true";
+          var radio = "http://0.0.0.0:5000/stations/?format=json"
+            $.getJSON(geocodingAPI, function (json) {
+              var address = json.results[0].formatted_address;
+              console.log('Address : ', address);
+              $('#stage').html('<p> Formatted Address: ' + address + '</p>');
+ 
+              var latitude = json.results[0].geometry.location.lat;
+              console.log('Latitude : ', latitude);
+              $('#stage').append('<p> Latitude: ' + latitude + '</p>');
+ 
+              var longitude = json.results[0].geometry.location.lng;
+              console.log('Longitude : ', longitude);
+              $('#stage').append('<p> Longitude: ' + longitude + '</p>');
+            });
+       });
+
+       $("#second").click(function(event){
+          alert("This is a sampe sentence.");
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function(){
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              document.getElementById("output").innerHTML = eval('(' + this.responseText + ')').name;
+            }
+          }
+          xhr.open('GET', "http://0.0.0.0:5000/stations/?format=json", true);
+          xhr.send();
+    });
+    function loadXMLDoc()
+{
+  alert();
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("output").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","http://0.0.0.0:5000/stations/?format=json" + Math.random(),true);
+xmlhttp.send();
+}
+    </script>
+</head>
+<body>
+   <p>Click on the button to load result.html file:</p>
+   <div id="stage">
+          STAGE
+   </div>
+   <input type="button" id="driver" value="Load Data" />
+   <input type="button" id="second" value="Test JSON" >
+   <button type="button" onclick="loadXMLDoc()">Request Data</button>
+   <div id="output">
+     OUTPUT
+   </div>
+</body>
+</html>

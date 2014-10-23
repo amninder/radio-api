@@ -12,17 +12,17 @@ from stations.models import Station
 class StationSerializer(serializers.Serializer):
     pk 		= serializers.Field()  # Note: `Field` is an untyped read-only field.
     name 	= serializers.CharField(required=False,
-                                  max_length=100)
+    max_length=100)
     lat 	= serializers.CharField(required=False,
-                                  max_length=100)
+    max_length=100)
     lng 	= serializers.CharField(required=False,
-                                  max_length=100)
+    max_length=100)
     url 	= serializers.CharField(required=False,
-                                  max_length=100)
+    max_length=100)
     school  = serializers.CharField(required=False,
-                                  max_length=100)
+    max_length=100)
     state  = serializers.CharField(required=False,
-                                  max_length=100)
+    max_length=100)
 
     def restore_object(self, attrs, instance=None):
         """
@@ -42,15 +42,15 @@ class StationSerializer(serializers.Serializer):
             instance.state = attrs.get('state', instance.url)
             return instance
 
-        # Create new instance
-        return Snippet(**attrs)
+            # Create new instance
+            return Snippet(**attrs)
 
 
 
-"""
-name 			= models.CharField(('name'), max_length=255)
-	lat 			= models.CharField(('lat'), max_length=255)
-	lng 			= models.CharField(('lng'), max_length=255)
-	url 			= models.CharField(('url'), max_length=255)
+            """
+            name 			= models.CharField(('name'), max_length=255)
+            lat 			= models.CharField(('lat'), max_length=255)
+            lng 			= models.CharField(('lng'), max_length=255)
+            url 			= models.CharField(('url'), max_length=255)
 
-"""
+            """
